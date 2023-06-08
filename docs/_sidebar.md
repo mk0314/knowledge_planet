@@ -2,7 +2,7 @@
  * @Author: mengkun822 1197235402@qq.com
  * @Date: 2023-06-08 16:01:07
  * @LastEditors: mengkun822 1197235402@qq.com
- * @LastEditTime: 2023-06-08 16:15:03
+ * @LastEditTime: 2023-06-08 16:37:20
  * @FilePath: \knowledge_planet\_sidebar.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -10,7 +10,7 @@
 -   [:octocat: 首页](./README)
 -   :memo: 目录
 
-    -   第 1 章：开发入门张文波大佬
+    -   第 1 章：开发入门
 
         -   [第 1 节：IDEA 插件怎么开发](./md/idea-plugin/2021-08-27-技术调研IDEA插件怎么开发.md)
         -   [第 2 节：IDEA 插件怎么发布](./md/idea-plugin/2021-08-29-技术实践IDEA插件怎么发布.md)

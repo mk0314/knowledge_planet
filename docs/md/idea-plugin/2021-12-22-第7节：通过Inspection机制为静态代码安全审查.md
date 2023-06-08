@@ -1,9 +1,9 @@
-# 第9节：通过Inspection机制，对静态代码安全审查
+# 第 9 节：通过 Inspection 机制，对静态代码安全审查
 
-作者：小傅哥
+作者：Quokka
 <br/>博客：[https://bugstack.cn](https://bugstack.cn)
 
->沉淀、分享、成长，让自己和他人都能有所收获！😄
+> 沉淀、分享、成长，让自己和他人都能有所收获！😄
 
 ## 一、前言
 
@@ -33,7 +33,7 @@ guide-idea-plugin-pmd
 └── src
     ├── main
     │   └── java
-    │   	└── cn.bugstack.guide.idea.plugin 
+    │   	└── cn.bugstack.guide.idea.plugin
     │       	├── rule
     │       	│	├── FastJsonAutoType.java
     │       	│	├── HardcodedIp.java
@@ -43,21 +43,21 @@ guide-idea-plugin-pmd
     ├── resources
     │   ├── inspectionDescriptions
     │   │   ├── FastJsonAutoType.html
-    │   │   ├── HardcodedIp.html  
+    │   │   ├── HardcodedIp.html
     │   │   └── ReplacePseudorandomGenerator.html
     │   └── META-INF
-    │       └── plugin.xml 
-    ├── build.gradle  
+    │       └── plugin.xml
+    ├── build.gradle
     └── gradle.properties
 ```
 
 **源码获取**：#公众号：`bugstack虫洞栈` 回复：`idea` 即可下载全部 IDEA 插件开发源码
 
-在此 IDEA 插件工程中，主要分为3块区域：
+在此 IDEA 插件工程中，主要分为 3 块区域：
 
-- rule：规则配置区域，以继承 IDEA 原生 Inspection 检查类，扩展自身需要扫描的代码片段，进行警告、注释、修复。
-- inspectionDescriptions：是对应的警告注释，编写到 html 中，最终展示到 IDEA 下对应的问题代码片段上。
-- plugin.xml：中需要配置 localInspection 也就是配置你自定义的代码检测实现类。
+-   rule：规则配置区域，以继承 IDEA 原生 Inspection 检查类，扩展自身需要扫描的代码片段，进行警告、注释、修复。
+-   inspectionDescriptions：是对应的警告注释，编写到 html 中，最终展示到 IDEA 下对应的问题代码片段上。
+-   plugin.xml：中需要配置 localInspection 也就是配置你自定义的代码检测实现类。
 
 ### 2. 伪随机数检测
 
@@ -74,10 +74,10 @@ PsiNewExpression secureNewExp = (PsiNewExpression) factory.createExpressionFromT
 newExp.replace(secureNewExp);
 ```
 
-- 通过继承 `AbstractBaseJavaLocalInspectionTool` Override `buildVisitor` 方法，扩展检测代码。*当你写了这段方法后，IDEA 会把一行行的代码都通过这个方法传进来*
-- 在 `visitNewExpression` 方法中扩展自身的检测处理，遇到了哪种代码片段，要提供什么样的提醒以及提醒的级别，最后是提供一个 Fix 修复能力，这个修复能力就在替换这段代码片段，通过还可以操作引入新包的动作 `import xxx`
+-   通过继承 `AbstractBaseJavaLocalInspectionTool` Override `buildVisitor` 方法，扩展检测代码。_当你写了这段方法后，IDEA 会把一行行的代码都通过这个方法传进来_
+-   在 `visitNewExpression` 方法中扩展自身的检测处理，遇到了哪种代码片段，要提供什么样的提醒以及提醒的级别，最后是提供一个 Fix 修复能力，这个修复能力就在替换这段代码片段，通过还可以操作引入新包的动作 `import xxx`
 
-### 3. FastJson检测
+### 3. FastJson 检测
 
 **目的**：`com.alibaba:fastjson` 在开启 AutoTypeSupport 时，存在反序列化风险。如果程序中有 `ParserConfig.getGlobalInstance().setAutoTypeSupport(true);` 代码直接提醒删除处理。
 
@@ -105,24 +105,24 @@ public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean is
 }
 ```
 
-- 整个对代码检测的操作基本都是类似的，这个无非也是检测出代码库，并进行删除的提醒处理 `DeleteElementQuickFix`
+-   整个对代码检测的操作基本都是类似的，这个无非也是检测出代码库，并进行删除的提醒处理 `DeleteElementQuickFix`
 
 ### 4. 提醒模板
 
 ```html
 <html>
-<body>
-<b>小傅哥-提醒:</b> 不安全的伪随机数生成器 <br>
-<br>
-<p>java.util.Random 依赖一个可被预测的伪随机数生成器。</p>
-<br>
-<p style="font-size: 10px;color: #629460;">最佳实践:</p>
-<p style="font-size: 10px;">使用java.security.SecureRandom</p>
-</body>
+    <body>
+        <b>Quokka-提醒:</b> 不安全的伪随机数生成器 <br />
+        <br />
+        <p>java.util.Random 依赖一个可被预测的伪随机数生成器。</p>
+        <br />
+        <p style="font-size: 10px;color: #629460;">最佳实践:</p>
+        <p style="font-size: 10px;">使用java.security.SecureRandom</p>
+    </body>
 </html>
 ```
 
-- 提醒模板需要编写 html 格式的内容，这个内容会被展示到错误代码的详情里。*后面我们做测试的可以查看*
+-   提醒模板需要编写 html 格式的内容，这个内容会被展示到错误代码的详情里。_后面我们做测试的可以查看_
 
 ### 5. 检测配置
 
@@ -134,14 +134,14 @@ public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean is
             bundle="InspectionBundle"     key="replace.pseudorandom.generator.name"
             implementationClass="cn.bugstack.guide.idea.plugin.rule.RandomRule"
     />
-    
+
     <localInspection
             language="JAVA"       groupPath="Java"
             groupName="X-PMD"   enabledByDefault="true"   level="ERROR"
             bundle="InspectionBundle"     key="fastjson.auto.type.name"
             implementationClass="cn.bugstack.guide.idea.plugin.rule.FastJsonRule"
     />
-    
+
     <localInspection
             language="JAVA"      groupPath="Java"
             groupName="X-PMD"  enabledByDefault="true"     level="WARNING"
@@ -151,7 +151,7 @@ public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean is
 </extensions>
 ```
 
-- 在 plugin.xml 中配置我们自己开发好的代码静态检测对象，这样你的检测类就生效了。
+-   在 plugin.xml 中配置我们自己开发好的代码静态检测对象，这样你的检测类就生效了。
 
 ## 四、测试验证
 
@@ -159,7 +159,7 @@ public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean is
 
 ![](https://bugstack.cn/images/article/assembly/assembly-211222-7-02.png)
 
-- 如果你下载代码后，没有 Plugin 可以自己配置一下，在 Tasks 中配置 `:runIde`
+-   如果你下载代码后，没有 Plugin 可以自己配置一下，在 Tasks 中配置 `:runIde`
 
 **错误提醒**
 
@@ -169,11 +169,11 @@ public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean is
 
 ![](https://bugstack.cn/images/article/assembly/assembly-211222-7-04.png)
 
-- 当你点击 Fix，那么接下来就可以进行自动替换代码并修复了，就是把 `Random random = new Random()` 替换为 `SecureRandom random = new SecureRandom();`
-- 其他2个也可以在获取代码后进行测试验证，一个是IP，另外一个是使用 `ParserConfig.getGlobalInstance().setAutoTypeSupport(true);` 的错误提醒。
+-   当你点击 Fix，那么接下来就可以进行自动替换代码并修复了，就是把 `Random random = new Random()` 替换为 `SecureRandom random = new SecureRandom();`
+-   其他 2 个也可以在获取代码后进行测试验证，一个是 IP，另外一个是使用 `ParserConfig.getGlobalInstance().setAutoTypeSupport(true);` 的错误提醒。
 
 ## 五、总结
 
-- 本章节我们学习了如何使用 IDEA 原生 Inspection 检查机制，扩展我们自己需要添加的代码检测逻辑，以及使用 LocalQuickFix 的实现类，做代码的替换和引入响应包的操作。
-- 另外对于代码检测，还有一个更加标准的工具叫 PMD 它是一款采用 BSD 协议的代码检查工具，你可以扩展实现为自己的标准和规范以及完善个性的提醒和修复操作。
-- 像 p3c 就是一款静态代码检测工具，用的人也非常多，不过它的插件开发不是基于 Java 实现的，代码开发上也并没有一些注释。所以非常建议阅读 pmd-idea，这款代码写的非常好，抽象充足、结构清晰、内容完整：[https://github.com/ybroeker/pmd-idea](https://github.com/ybroeker/pmd-idea)
+-   本章节我们学习了如何使用 IDEA 原生 Inspection 检查机制，扩展我们自己需要添加的代码检测逻辑，以及使用 LocalQuickFix 的实现类，做代码的替换和引入响应包的操作。
+-   另外对于代码检测，还有一个更加标准的工具叫 PMD 它是一款采用 BSD 协议的代码检查工具，你可以扩展实现为自己的标准和规范以及完善个性的提醒和修复操作。
+-   像 p3c 就是一款静态代码检测工具，用的人也非常多，不过它的插件开发不是基于 Java 实现的，代码开发上也并没有一些注释。所以非常建议阅读 pmd-idea，这款代码写的非常好，抽象充足、结构清晰、内容完整：[https://github.com/ybroeker/pmd-idea](https://github.com/ybroeker/pmd-idea)
