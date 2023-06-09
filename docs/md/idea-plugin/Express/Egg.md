@@ -7,7 +7,7 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 
-### Egg.js 是一款面向企业级应用的 Node.js 框架
+> ### Egg.js 是一款面向企业级应用的 Node.js 框架
 
 它基于 Koa.js 进行了进一步封装，提供了更加易用、可扩展、稳定、高性能的开发环境和工具链。
 
@@ -25,7 +25,7 @@ Egg.js 在 Koa.js 的基础上提供了以下特性：
 
 Egg.js 的应用场景非常广泛，适合于各种大中型企业和互联网公司的 Web 应用开发。它提供了非常友好的开发环境和工具链，开发者可以用最少的代码实现最复杂的功能。同时，Egg.js 也注重安全性和可扩展性，能够满足企业级应用的需求。
 
-### 项目结构
+> ### 项目结构
 
 ```
 egg-example/

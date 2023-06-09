@@ -1,4 +1,4 @@
-### === 和 == 区别
+> ### === 和 == 区别
 
 avaScript 中的===和==都是用于比较两个值的运算符，但它们的比较方式略有不同。
 
@@ -20,7 +20,7 @@ console.log(1 === '1'); // false
 
 因此，建议在比较两个值是否相等时，使用===运算符进行严格比较，避免隐式类型转换带来的误判。只在确实需要进行类型转换时，使用==运算符进行比较。
 
-### for in 、forEach、for of 区别
+> ### for in 、forEach、for of 区别
 
 JavaScript 中的 for-in、forEach 和 for-of 是三种遍历数组或对象的方式，它们的使用场景和行为有所不同。
 
@@ -54,7 +54,7 @@ for (variable of iterable) {
 
 需要注意的是，for-in 和 forEach 遍历的是元素的值，而 for-in 遍历的是对象属性的键名。此外，for-in 比其他两个方法更耗费性能，在遍历数组时会遍历所有原型链上的属性。建议在遍历数组时使用 for-of 或 forEach，而在遍历对象时使用 for-in。
 
-### 手写 Promise
+> ### 手写 Promise
 
 ```js
 class MyPromise {

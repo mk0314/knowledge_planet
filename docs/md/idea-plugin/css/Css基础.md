@@ -2,16 +2,20 @@
  * @Author: mengkun822 1197235402@qq.com
  * @Date: 2023-06-08 19:28:17
  * @LastEditors: mengkun822 1197235402@qq.com
- * @LastEditTime: 2023-06-09 08:54:38
+ * @LastEditTime: 2023-06-09 17:29:43
  * @FilePath: \knowledge_planet\docs\md\idea-plugin\css\css基础.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 
-### 什么是盒子模型？
+> ### 什么是 css
+
+css 是 Cascading Style Sheets 简写，中文名为层叠样式表，用于网页的布局和样式定义。css 可以控制容器的大小，字体颜色大小以及位置等样式。
+
+> ### 什么是盒子模型？
 
 盒子模型是指在 CSS 中，HTML 元素的每个元素都可以看作是一个矩形盒子，由内容（content）、内边距（padding）、边框（border）和外边距（margin）四个区域组成。
 
-### 如何居中一个元素？
+> ### 如何居中一个元素？
 
 对于块级元素，可以使用 margin 属性实现水平居中： margin: 0 auto;
 对于内联元素，可以使用 text-align 属性实现水平居中：text-align: center;
@@ -24,7 +28,7 @@ left: 50%;
 transform: translate(-50%, -50%);
 ```
 
-### 什么是 BFC？
+> ### 什么是 BFC？
 
 BFC（Block Formatting Context）是指块级格式化上下文，它是一个独立的渲染区域，具有一定的规则和限制。当一个元素触发 BFC 时，它会创建一个包含自身和子元素的独立渲染区域，与外部元素互不影响。
 

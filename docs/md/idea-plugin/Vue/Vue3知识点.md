@@ -2,16 +2,16 @@
  * @Author: mengkun822 1197235402@qq.com
  * @Date: 2023-06-08 19:07:57
  * @LastEditors: mengkun822 1197235402@qq.com
- * @LastEditTime: 2023-06-08 19:43:15
+ * @LastEditTime: 2023-06-09 17:25:33
  * @FilePath: \knowledge_planet\docs\md\idea-plugin\Vue\Vue3知识点.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 
-### 概念
+> ### 概念
 
 Vue3 是一种流行的 JavaScript 框架，用于构建交互式用户界面和单页面应用程序。它是 Vue.js 框架的最新版本，提供了一些新的特性和改进，如更好的性能、更好的 TypeScript 支持、重构的响应式系统等等。Vue3 的主要目标是简化开发过程和提高开发效率，同时保持灵活性和可扩展性。如果您正在寻找一种现代化的 JavaScript 框架来构建动态 Web 应用程序，Vue3 可能是一个很好的选择。
 
-### 知识点
+> ### 知识点
 
 以下是 Vue3 的一些常见知识点：
 

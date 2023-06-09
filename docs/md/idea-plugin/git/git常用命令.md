@@ -2,12 +2,28 @@
  * @Author: mengkun822 1197235402@qq.com
  * @Date: 2023-06-08 19:19:00
  * @LastEditors: mengkun822 1197235402@qq.com
- * @LastEditTime: 2023-06-08 19:23:56
+ * @LastEditTime: 2023-06-09 17:24:01
  * @FilePath: \knowledge_planet\docs\md\idea-plugin\git\git常用命令.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 
-### Git 常用命令：
+> ### 设置以及查看本地 git 账号邮箱
+
+查看配置信息
+
+```git
+git config --list
+```
+
+设置本地账号信息
+
+```git
+git config --global user.name "xxx"
+git config --global user.email "xxx"
+
+```
+
+> ### Git 常用命令：
 
 Git 是一个分布式版本控制系统，被广泛应用于软件开发中。
 
