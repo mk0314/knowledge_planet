@@ -2,7 +2,7 @@
  * @Author: mengkun822 1197235402@qq.com
  * @Date: 2023-06-08 19:28:17
  * @LastEditors: mengkun822 1197235402@qq.com
- * @LastEditTime: 2023-06-08 19:30:02
+ * @LastEditTime: 2023-06-09 08:54:38
  * @FilePath: \knowledge_planet\docs\md\idea-plugin\css\css基础.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -27,6 +27,7 @@ transform: translate(-50%, -50%);
 ### 什么是 BFC？
 
 BFC（Block Formatting Context）是指块级格式化上下文，它是一个独立的渲染区域，具有一定的规则和限制。当一个元素触发 BFC 时，它会创建一个包含自身和子元素的独立渲染区域，与外部元素互不影响。
+
 触发 BFC 的方式：
 根元素
 浮动元素（float 值不为 none）
@@ -36,5 +37,7 @@ overflow 值不为 visible 的元素
 如何实现响应式布局？
 
 使用媒体查询（Media Queries）：根据屏幕尺寸和设备特性来设置不同的 CSS 样式，从而适应不同的设备和屏幕尺寸。
+
 使用弹性盒子布局（Flexbox）：通过使用 flex 属性，可以轻松地对子元素进行水平和垂直方向的布局调整，从而实现响应式布局。
+
 使用网格布局（Grid Layout）：通过将页面分成网格形式的栅格，可以轻松地对子元素进行布局和调整，适应不同的屏幕尺寸。
