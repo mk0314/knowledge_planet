@@ -2,7 +2,7 @@
  * @Author: mengkun822 1197235402@qq.com
  * @Date: 2023-06-13 09:53:17
  * @LastEditors: mengkun822 1197235402@qq.com
- * @LastEditTime: 2023-06-13 20:39:14
+ * @LastEditTime: 2023-06-14 11:30:58
  * @FilePath: \knowledge_planet\docs\md\Linux\Linux.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -71,6 +71,8 @@ Linux 系统的命令通常
 
 3. ls - list directory contents - 列出目录下的目录
 
+    l - 查看文件状态
+
 4. cat - concatrenate - 链接多个文件（查看文件内容）
 
 5. touch - 创建空文件或者修改已有文件的最后访问时间
@@ -98,9 +100,13 @@ Linux 系统的命令通常
     -cvf - 创建归档文件（将多个文件合成一个文件）
 
 13. wc - word count - 查看文件行数、单词数、字符数
+
     -l - 查看行数
+
     -w - 查看单词数
+
     -c - 查看字符数
+
 14. sort - 文件排序
     -r - 降序（默认是从小到大 - 升序）
 
@@ -190,3 +196,213 @@ ignoremap **main** if **name** == '**main**':
 ：qa 退出所有窗口
 
 vim -d 文件 1 文件 2 -打开多文件进行版本比较
+
+宏操作：
+
+录制宏 - qa(a 是寄存器的名字) - recording
+
+结束录制 - q
+
+播放录制 - @a(a 是寄存器名字)
+
+查找命令：
+
+grep - 搜索字符串（支持正则表达式）
+
+find - 搜索文件
+
+例子：find / -name "\*.html"
+
+-name - 根据名字搜索
+
+-size - 根据大小搜索 - -10M / + 10M
+
+-type - 根据类型搜索 - d
+
+-atime - 最后访问时间
+
+-mtime - 最后修改时间
+
+-ctime - 创建时间
+
+> ### 网络相关命令
+
+-   #### ssh
+
+格式：
+
+```linux
+ ssh 用户名@服务器ip地址
+```
+
+例子：
+
+```
+ssh root@123.33.22.44
+```
+
+-   #### scp
+
+scp 命令是可以上传文件到 linux 系统上， scp 命令通过 ssh 协议来进行加密传送，进而保证了数据的安全性
+
+如果想上传某个文件到 linux 系统上，格式为
+
+```
+ scp 文件路径 用户名@服务器ip
+```
+
+例子：本地文件/home/user/myfile.txt 上传到远程服务器 192.168.1.100 的/home/server 目录下，可以在本地终端中执行以下命令：
+
+```
+scp /home/user/myfile.txt user@192.168.1.100:/home/server
+```
+
+如果需要上传整个目录，可以加上-r 参数，如：
+
+```
+scp -r /home/user/mydir user@192.168.1.100:/home/server
+```
+
+-   #### sftp
+
+sftp（Secure File Transfer Protocol）是一种基于 SSH 协议的安全文件传输方式。它提供了类似 FTP 的文件传输功能，但使用 SSH 协议进行加密传输，保证了传输过程中的数据安全性。
+
+与 FTP 不同的是，sftp 使用了加密的通道来传输数据，因此也需要进行身份验证。在使用 sftp 之前，需要确保已经成功连接到 SSH 服务器，并提供了正确的用户名和密码进行身份验证。
+
+一旦登录成功，就可以使用 sftp 命令进行文件传输。以下是一些常用的 sftp 命令：
+
+-   ls：列出当前目录下的文件和子目录。
+
+-   cd：进入指定的目录。
+
+-   pwd：显示当前所在的目录。
+
+-   get：从远程服务器下载指定的文件。
+
+-   put：上传本地文件到远程服务器。
+
+-   rm：删除指定的远程文件。
+
+-   mkdir：在远程服务器上创建一个新的目录。
+
+-   rmdir：删除指定的目录。
+
+-   sftp 的使用方法和 FTP 类似，但所有的传输数据都是加密的，比 FTP 更为安全。
+
+-   #### ping
+
+    ping 检测网络的可达性 - ICMP - Internet Controll Management Protocol -网络管理层
+
+    -ttl -time to live
+
+    -PING TO DEATH - DDoS - Distributed Deny of Service - 分布式拒绝服务攻击
+
+-   #### ifconfig / ipconfig
+
+ifconfig 命令是一个用于在 Linux 系统上查询、配置和管理网络接口的命令行工具。它的名字来自 “interface configuration”（接口配置）的缩写。
+
+通过运行 ifconfig 命令，你可以查询当前系统中的所有网络接口，并显示有关每个接口的详细信息。这些信息可能包括接口的 IP 地址、子网掩码、MAC 地址、接收或发送的数据包数量等等。
+
+以下是一些常用的 ifconfig 命令选项：
+
+ifconfig：显示所有网络接口的详细信息。
+
+ifconfig eth0：显示名为 eth0 的网络接口的详细信息。
+
+ifconfig -a：显示所有网络接口的详细信息，包括未启用的接口。
+
+ifconfig eth0 up/down：打开或关闭名为 eth0 的网络接口。
+
+ifconfig eth0 192.168.0.2 netmask 255.255.255.0：将名为 eth0 的网络接口的 IP 地址设置为 192.168.0.2，子网掩码设置为 255.255.255.0。
+
+使用 ifconfig 命令需要 root 权限或具有管理员权限的用户才能执行。如果当前系统中没有安装 ifconfig 命令，则可以使用其他网络管理工具（如 ip 命令）代替。
+
+ipconfig 是一个 Windows 系统上的命令行工具，用于查询和配置系统的网络接口信息。它可以显示当前系统中所有的网络适配器（包括以太网适配器、无线局域网适配器、虚拟网络适配器等），以及每个适配器的 IP 地址、子网掩码、默认网关、DNS 服务器等详细信息。
+
+以下是一些常用的 ipconfig 命令选项：
+
+ipconfig：显示所有网络接口的详细信息。
+
+ipconfig /all：显示所有网络接口的详细信息，包括未启用的接口。
+
+ipconfig /release：释放当前所有网络接口的 IP 地址。
+
+ipconfig /renew：为当前所有网络接口获取新的 IP 地址。
+
+ipconfig /flushdns：清除本地 DNS 缓存。
+
+ipconfig /displaydns：显示本地 DNS 缓存中的所有记录。
+
+需要注意的是，ipconfig 只在 Windows 操作系统下可用。在 Linux 或其他操作系统中，需要使用相应的命令行工具（如 ifconfig）来查询和配置网络接口信息。
+
+-   #### netstat
+
+netstat 是一个用于显示活动的网络连接和各种网络统计信息的命令行工具。在 Windows 和 Linux 等操作系统中，netstat 命令通常用于诊断和监控网络连接。
+
+下面是 netstat 常用的一些参数和其作用：
+
+-a：显示所有网络连接和监听端口。
+
+-n：使用数字形式显示地址和端口号，而不是名称形式。
+
+-b：显示正在占用每个网络连接的可执行文件。
+
+-o：显示正在占用每个网络连接的进程 ID。
+
+-p：显示正在占用每个网络连接的进程名称和 ID。
+
+-r：显示路由表。
+
+-s：显示各种网络的统计信息，包括 IP、ICMP、TCP 和 UDP。
+
+-t：显示 TCP 连接。
+
+-u：显示 UDP 连接。
+
+-e：显示以太网统计信息。
+
+通过使用这些参数，我们可以了解当前系统中的网络连接情况、端口占用情况、网络传输统计信息、路由表等，从而对网络进行诊断和调试。
+
+需要注意的是，netstat 命令需要在管理员权限下运行才能显示全部数据。
+
+> #### 启动停止重启服务
+
+systemctl 是用于一个管理系统服务的命令行工具，它通常用于 Linux 系统启动停止重启
+
+-   systemctl start [SERVICE]：启动指定的服务。
+-   systemctl stop [SERVICE]：停止指定的服务。
+-   systemctl restart [SERVICE]：重新启动指定的服务。
+-   systemctl status [SERVICE]：查看指定服务的状态。
+-   systemctl enable [SERVICE]：设置指定的服务为开机启动。
+-   systemctl disable [SERVICE]：取消指定服务的开机启动。
+
+在 Linux 系统中，有许多服务是自动启动的，例如网络服务、系统日志服务、SSH 服务等。通过使用 systemctl 命令，我们可以启动或停止这些服务，也可以设置服务为开机启动或取消开机启动。
+
+除了上述命令外，systemctl 还提供了许多其他的操作，如 mask（禁用指定的服务）、unmask（启用已禁用的服务）、list-unit-files（列出可用服务）等。综合运用这些命令，我们可以更好地管理 Linux 系统中的各种服务。
+
+> ### 进程相关操作
+
+-   ps - process
+
+-   kill
+    kill 进程号 -杀死进程
+
+-   jobs
+
+-   fg / bg -foreground / background
+
+-   top
+
+下面是一些常见的进程相关操作：
+
+创建进程：进程可以通过 fork() 或者 exec() 等系统调用来创建。fork() 调用会创建一个新的进程，该进程是原进程的副本，并且从父进程继承了所有的资源、文件描述符等；exec() 调用则用于启动一个新程序并替换当前进程所执行的内容。
+
+终止进程：进程可以通过 exit() 调用来终止自己，或者通过 kill 命令向另一个进程发送信号来终止它。
+
+查询进程信息：进程可以通过 getpid() 和 getppid() 等系统调用来获取自己和父进程的进程 ID，也可以使用 ps 命令查看系统中正在运行的进程列表。
+
+暂停和恢复进程：进程可以通过 sleep() 系统调用来暂停自己的执行，并在指定的时间后恢复执行；也可以通过 signal 系统调用来捕捉信号，并根据信号来决定是否暂停或恢复执行。
+
+进程间通信：进程之间可以通过管道、消息队列、共享内存等方式来进行通信，从而实现数据的传递和共享。
+
+总的来说，进程是操作系统中非常重要的概念之一。通过掌握进程的创建、终止、查询和通信等相关操作，可以更好地理解和管理系统中正在运行的进程。
