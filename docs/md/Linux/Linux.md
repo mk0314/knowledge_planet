@@ -2,7 +2,7 @@
  * @Author: mengkun822 1197235402@qq.com
  * @Date: 2023-06-13 09:53:17
  * @LastEditors: mengkun822 1197235402@qq.com
- * @LastEditTime: 2023-06-14 11:30:58
+ * @LastEditTime: 2023-06-14 15:22:04
  * @FilePath: \knowledge_planet\docs\md\Linux\Linux.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -385,9 +385,9 @@ systemctl 是用于一个管理系统服务的命令行工具，它通常用于 
 -   ps - process
 
 -   kill
-    kill 进程号 -杀死进程
+    kill -进程号 -杀死进程
 
--   jobs
+-   jobs - 查看后台运行或者停止的进程
 
 -   fg / bg -foreground / background
 
