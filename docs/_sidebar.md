@@ -2,7 +2,7 @@
  * @Author: mengkun822 1197235402@qq.com
  * @Date: 2023-06-08 16:01:07
  * @LastEditors: mengkun822 1197235402@qq.com
- * @LastEditTime: 2023-06-12 10:03:17
+ * @LastEditTime: 2023-07-01 09:18:21
  * @FilePath: \knowledge_planet\_sidebar.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -53,10 +53,12 @@
     -   [:memo: 避免循环导入](./md/Python/避免循环导入.md)
     -   [:memo: 正则表达式](./md/Python/正则表达式.md)
     -   [:memo: 进程](./md/Python/进程.md)
+    -   [:memo: 连接 mysql](./md/Python/连接mysql.md)
 
--   📚 Java
+-   📚 工作案例
 
-    -   [:memo: Java 基础](./md/Java/Java基础.md)
+    -   [:memo: 批量加载 dom 的自动滚动大屏](./md/工作案例/自动滚动大屏.md)
+    -   [:memo: 甘特图](./md/工作案例/甘特图.md)
 
 -   📚 H5
 
@@ -73,6 +75,10 @@
 -   📚 Nginx
 
     -   [:memo: Nginx](./md/Nginx/Nginx.md)
+
+-   📚 脚手架
+
+    -   [:memo: 脚手架](./md/脚手架/脚手架.md)
 
 -   📚 Linux
 
