@@ -1,6 +1,15 @@
+<!--
+ * @Author: mengkun822 1197235402@qq.com
+ * @Date: 2023-06-08 16:01:07
+ * @LastEditors: mengkun822 1197235402@qq.com
+ * @LastEditTime: 2023-07-01 14:57:15
+ * @FilePath: \knowledge_planet\docs\README.md
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+
 # 知识星球说明 🔥
 
-> 大家好，我是 Quokka，知识星球的作者，一名全栈工程师。
+> 大家好，我是 Quokka，知识星球的作者。
 
 一个 2020 年计科毕业十分着迷于技术又喜欢不断折腾的技术活跃者，虽主打前端，但不局限于自己去学习 Go、Python、Node 语言,不要让工作的岗位限制自己成为更优秀的人。知识星球主要是记录和分享自己在平时工作生活中的学习心得以及心酸的踩坑史，希望对小伙伴们有所帮助。
 
