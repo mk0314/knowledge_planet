@@ -2,7 +2,7 @@
  * @Author: mengkun822 1197235402@qq.com
  * @Date: 2023-06-08 16:01:07
  * @LastEditors: mengkun822 1197235402@qq.com
- * @LastEditTime: 2023-07-11 09:38:57
+ * @LastEditTime: 2023-07-15 08:32:08
  * @FilePath: \knowledge_planet\_sidebar.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -22,8 +22,8 @@
 
 -   📚 Css
 
-    -   [:memo: Css 基础](./md/css/Css基础.md)
-    -   [:memo: 网站常见布局](./md/css/网站常见布局.md)
+    -   [:memo: Css 基础](./md/Css/Css基础.md)
+    -   [:memo: 网站常见布局](./md/Css/网站常见布局.md)
 
 -   📚 Express
 
