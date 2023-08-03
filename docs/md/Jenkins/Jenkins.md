@@ -2,7 +2,7 @@
  * @Author: mengkun822 1197235402@qq.com
  * @Date: 2023-06-15 13:52:42
  * @LastEditors: mengkun822 1197235402@qq.com
- * @LastEditTime: 2023-08-02 11:24:41
+ * @LastEditTime: 2023-08-03 09:55:05
  * @FilePath: \knowledge_planet\docs\md\Jenkins\Jenkins.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -74,3 +74,43 @@ docker images
 ![Alt text](image-10.png)
 
 出现此页面就代表你 docker 部署 jenkins 成功了
+
+> ### 查看管理员密码
+
+-   查看 docker 容器的 id
+
+```dash
+docker ps -a
+```
+
+-   登录到服务器
+
+![Alt text](image-11.png)
+
+> ### 用 java 安装部署 jenkins
+
+首先要先要用官网下载 jenkins.war 包，然后上传到服务器上，然后用 java 命令启动 jenkins
+
+```dash
+java -jar jenkins.war
+```
+
+![Alt text](image-12.png)
+
+这样就启动成功了，然后打开浏览器输入 ip:8080 就可以看到 jenkins 了
+
+![Alt text](image-13.png)
+
+但是这样会存在一个缺点
+
+java -jar jenkins.war 命令启动 jenkins 服务器，但是默认情况下，它紧紧在控制台或者终端窗口中运行，退出控制台或者终端窗口，jenkins 也就停止运行了。
+
+所以我们需要将 jenkins 服务器的后台运行，这样即使退出终端窗口，jenkins 服务仍然在后台运行。
+
+可以使用以下方法：
+
+```dash
+nohup java -jar jenkins.war  > jenkins.log 2>&1 &
+```
+
+这样关闭终端窗口，jenkins 仍然在后台运行
