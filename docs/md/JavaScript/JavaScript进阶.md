@@ -101,3 +101,68 @@ class MyPromise {
     }
 }
 ```
+
+> ### call、bind、apply 的区别
+
+call、 bind、apply 都是用来改变函数的上下文（this 指向）的方法。
+
+它们都接收两个参数，第一个参数都是要改变上下文的对象，第二个参数都是要传递给函数的参数。
+
+-   call 方法：call 方法允许你显示的设置函数的 this 值，并立即执行该函数，它接受一个对象作为第一个参数，这个对象成为函数执行时的 this 值，然后是参数列表，call 方法可以传递多个参数作为函数的参数。
+
+```js
+function greet(name) {
+    console.log('Hello ' + name);
+}
+
+const person = { name: 'John' };
+
+greet.call(person, 'Jack'); // 'Hello Jack'
+```
+
+#### call 函数内部做了什么
+
+1. 函数通过**proto**原型链找到了 Function.protottype 上的 call 方法
+
+2. 确定 this 为执行函数
+
+3. 接下来要执行函数，但是执行函数的上下文需要传递进来的第一个参数，所以想办法改变 this 的指向
+
+4. 正式执行函数，并返回执行结果
+
+### call 基础版实现
+
+```js
+Function.prototype.myCall = function (context, ...args) {
+    // 第一步：this就是对应的执行函数，也就是调用函数fun
+    const self = this;
+    // 第二步：想要执行函数时需要函数的上下文传入的上下文，想要改变调用上下文最好的办法是直接上下文对象调用函数，这时候函数内部的this就指向了上下文
+
+    // 一个小结论 xx1.xx2 xx2的this指向了xx1
+
+    // 使用symbol类型可以保证属性名的唯一性，而且不会被遍历枚举出来
+
+    const symbolKey = Symbol('fun');
+    content[symbolKey] = self;
+
+    // 第三步：执行函数，并返回执行结果
+
+    const result = context[symbolKey](...args);
+
+    // 第四步：删除属性，防止内存泄漏
+
+    delete content[symbolKey];
+
+    // 返回结果
+    return result;
+})
+
+
+// 测试
+const fun = function (params) {
+    let a = this.a
+    console.log(a, params)
+}
+
+fun.call({a: 233}, '哈哈哈哈')
+```
