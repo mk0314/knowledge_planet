@@ -166,3 +166,36 @@ const fun = function (params) {
 
 fun.call({a: 233}, '哈哈哈哈')
 ```
+
+> ### 函数的柯里化
+
+函数的柯里化是一种将接受多个参数的函数转换为一系列接受单个参数的函数技术
+
+通过函数的柯里化可以将一个参数变得更加的灵活、可组合，并且更容易进行部分应用。
+
+在函数柯里化中，函数的第一个参数是函数的执行上下文，第二个参数开始才是函数的参数。
+
+每个函数都会返回一个新的函数，接受下一个参数，直到所有参数都被传入，然后执行函数，最终返回结果。
+
+举个栗子：
+
+```js
+function curry(fn) {
+    return function curried(...args) {
+        if (args.length >= fn.length) {
+            return fn(...args);
+        } else {
+            return function (...args2) {
+                return curried(...args, ...args2);
+            };
+        }
+    };
+}
+
+function sum(a, b, c) {
+    return a + b + c;
+}
+
+const curriedSum = curry(sum);
+curriedSum(1)(2)(3); // 6
+```
