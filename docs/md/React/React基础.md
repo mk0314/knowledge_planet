@@ -2,7 +2,7 @@
  * @Author: mengkun822 1197235402@qq.com
  * @Date: 2023-07-11 09:18:29
  * @LastEditors: mengkun822 1197235402@qq.com
- * @LastEditTime: 2023-09-02 16:37:39
+ * @LastEditTime: 2023-09-06 10:27:43
  * @FilePath: \knowledge_planet\docs\md\React\React基础.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -451,3 +451,225 @@ function UncontrolledInput() {
 -   卸载阶段（unmounting）
 
     -   componentWillUnmount(): 组件卸载前调用，用于清理内存等
+
+componenetWillReceiverProps 相当于 vue 的 watch
+
+> ### 消息订阅与发布技术
+
+在 react 中，可以使用消息订阅与发布模式实现组件之间的通信。这种模式也被称为观察者模式
+
+实现方式：
+
+1. 创建一个事件中心：可以是一个独立的 JavaScript 的模块，用于管理事件的订阅和发布。
+
+```js
+// eventCenter.js
+const eventCenter = {
+    events: {},
+    subscribe(eventName, callback) {
+        if (!this.events[eventName]) {
+            this.events[eventName] = [];
+        }
+        this.events[eventName].push(callback);
+    },
+
+    publish(eventName, data) {
+        const callback = this.events[eventName];
+        if (callback) {
+            callbacks.forEach((callback) => callback(data));
+        }
+    },
+};
+
+export default eventCenter;
+```
+
+2. 需要订阅事件的组件中使用 subscribe 方法订阅事件，并定义事件处理函数。
+
+```js
+// SubsciberComponent
+import React from 'react';
+import eventCenter from './eventCenter';
+
+function SubsciberComponent() {
+    useEffect(() => {
+        const handleEvent = (data) => {
+            // 处理事件的逻辑
+            console.log(data);
+        };
+
+        eventCenter.subscribe('eventName', handleEvent);
+
+        return () => {
+            eventCenter.unsubscibe('eventName', handleEvent);
+        };
+    }, []);
+    return <div>Subscribe Component</div>;
+}
+
+export default SubscribeComponent;
+```
+
+3. 在需要发布事件的组件使用 publish 方法来发布事件，并传递需要传递的数据
+
+```js
+// PublisherComponet
+import React from 'react';
+import eventCenter from './eventCenter';
+
+function PublisherComponet() {
+    const handleClick = () => {
+        eventCenter.publish('eventName', { message: 'hello wolrd!' });
+    };
+}
+```
+
+> ### 路由（react-router-dom）
+
+-   什么是路由？
+
+    -   路由就是一个映射关系（key:value）
+    -   key 为路径，value 可能是 function 或者 component
+
+-   内置组件
+    -   BrowserRouter (history 路由)
+    -   HashRouter (hash 路由)
+    -   Route
+    -   Redirect
+    -   Link
+    -   NavLink
+    -   Switch
+
+> ### 向路由组件传参
+
+-   params 参数
+
+    -   路由链接（携带参数）：<Link to={'/demo/test/tom/18'}></Link>
+    -   注册路由（声明接收）：<Link path="/demo/test/:name/:age" element={Test}></Link>
+    -   接收参数 const {name, age} = this.props.match.params
+
+-   search 参数
+
+    -   路由链接（携带参数）：<Link to={'/demo/test?name=tom&age=18'}></Link>
+    -   注册路由（声明接收）：<Link path="/demo/test" element={Test}></Link>
+    -   接收参数 const {name, age} = this.props.location.search
+        注意： 获取到的 search 是 urlencode 编码字符串，需要借助 query-string 库来解析
+
+-   state 参数
+
+    -   路由链接（携带参数） <Link to={{pathname: '/demo/test', state: {name: 'tom', age: 18}}}></Link>
+
+    -   注册路由（声明接收）：<Link path="/demo/test" element={Test}></Link>
+
+    -   接收参数 const {name, age} = this.props.location.state
+        注意：刷新也可以保留参数
+
+withRouter 可以让一般组件拥有路由组件的 props
+
+-   Routes 和 Route
+
+1. V6 版本移除了 switch，引入了新的替代者：<Routes>
+2. <Routes>和<Route>要配合使用，且必须要用<Routes>包裹
+3. <Route>相当于一个 if 语句，如果其路径与当前的 Url 匹配，则其呈现对应的组件
+4. <Route caseSensitive>属性用于指定：匹配时是否区分大小写（默认为 false）
+5. 当 URL 发生变化时， <Routes>会查看其所有子<Route>元素以找到最佳匹配并呈现组件
+6. <Route>也可以嵌套使用，且可配合 useRoutes()配置路由，但需要<Outlet>组件来渲染其子路由
+
+```jsx
+<Routes>
+    <Route path='home' element={<Home />}>
+        <Route path='userinfo' element={<Userinfo />}></Route>
+        <Route path='detail' element={<Detail />}></Route>
+    </Route>
+</Routes>
+```
+
+-   useNavigate（）
+
+作用是： 返回一个函数用来实现编程式导航
+
+```jsx
+import React from 'react';
+import {useNavigate} from 'react-router-dom';
+
+
+export default from demo () {
+    const navigate = useNavigate();
+    // 第一种方式，指定具体的路径
+    const handle =() => {
+        navigate('/login', {
+            replace: true,
+            state: { name: 'tom', age: 18}
+        })
+    }
+    // 第二种方式，传入数据进行前进或后退，类似于 history.go()方法
+    navigate(-1)
+    return (
+        <button onClick={handle}> 按钮</button>
+    )
+}
+```
+
+-   useParams
+
+作用是获取当前路由匹配的 params 参数，类似于 5.x 版本中的 this.props.match.params
+
+> ### Hooks
+
+#### 使用 hooks 理由
+
+1. 高阶组件为了复用代码，导致代码层级复杂。
+
+2. 生命周期的复杂。
+
+3. 写成 function 组件， 无状态组件，因为需要状态，又改成了 class 成本高。
+
+-   useState(保存组件状态)
+
+```js
+const { state, setstate } = useState(initialState);
+```
+
+-   useEffect(副作用)和 useLayoutEffect(同步执行副作用)
+
+**函数组件不存在生命周期，所以不需要把类组件的生命周期搬过来尝试对号入座**
+
+```js
+useEffect(() => {
+    return () => {};
+});
+```
+
+> ### Redux
+
+Redux 是一个用于管理 JavaScript 应用状态的可预测性状态容器，它是一个库，不是框架。它可以帮助你
+
+-   redux 是一个专门用于做状态管理的 js 库
+
+-   它可以在 react、angular、vue 等前端框架中使用
+
+-   集中式管理应用中多个组件共享状态
+
+#### 什么情况下使用 Redux
+
+-   某个组件的状态需要让其他组件可以随时拿到（共享）
+
+-   一个组件需要改变另一个组件的状态（通信）
+
+-   总体原则： 能不用就不用，如果不用比较吃力才会考虑使用。
+
+#### Redux 三个核心 API
+
+![Alt text](image-2.png)
+
+redux 的主要核心概念和工作原理：
+
+-   Store（存储）:Store 是存储应用程序的状态的地方，它是单一源头的真实数据源，并且通过 dispatching(派发)actions 来更新状态。
+
+-   Action（动作）：Action 是一个用于描述发生了什么的对象。它是 store 所有状态改变的原因。它是一个简单的 js 对象，必须包含一个 type 字段来只是所执行的操作。
+
+-   Reducer（函数）：Reducer 是一个纯函数，它接收先前的状态和当前的 action，并返回新的状态。他定义了如何处理不同类型的 Action，并且负责计算新的状态
+
+-   Dispatch(派发)： Dispatch 是一个触发 Action 的方法，当你想要更改应用程序时的状态时，需要 dispatch 一个 action 到 store
+
+-   Subscribe(订阅)： Subscribe 是一个监听 store 状态变化的函数，每当 store 发生改变时，就会调用这个函数。

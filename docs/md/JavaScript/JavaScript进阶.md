@@ -199,3 +199,59 @@ function sum(a, b, c) {
 const curriedSum = curry(sum);
 curriedSum(1)(2)(3); // 6
 ```
+
+> ### 什么是前端工程化、结构化、模块化、组件化、自动化
+
+1. 前端模块化是指通过使用一系列的工具、流程和方法提高前端开发效率和质量的过程。它包括构建工具（如 webpack、gulp）、任务管理器（如 package.json 中 script 中配置的脚本命令）、代码规范（elsint、prettier）、版本控制（如 git 或 svn）、测试和部署等方面。
+
+2. 模块化是指将一个复杂的系统分解为多个模块以方便编码和维护。
+
+3. 组件化是指将一个复杂的系统分解为多个组件以方便复用。
+
+4. 自动化是指将重复的工作交给机器去完成，从而解放双手，提高效率，如 jenkins 等 CI 工具。
+
+5. 结构化是指将一个复杂的问题分解为多个子问题，每个子问题只解决一个部分，从而降低复杂度。
+
+> ### fetch、ajax、axios 区别
+
+fetch、ajax、axios 的都是用于网络请求的技术或者工具。
+
+-   fetch 四浏览器提供的原生 APi，用于进行异步网络请求。它返回一个 Promise 对象，可以使用 then、catch 等方法进行结果接收和异常处理响应数据。它使用了 fetch 函数进行请求，并对 request 和 response 对象来封装和响应。
+
+```js
+fetch(url)
+    .then((res) => {
+        console.log(res);
+    })
+    .catch((err) => {
+        console.error(err);
+    });
+```
+
+-   ajax 是一种 XMLHttpRequest 对象进行异步网络请求技术。它在早期 Web 开发中非常流行，并由于其广泛的浏览器兼容性而被广泛采用。使用 XMLHttpRequest 对象发送请求，并使用其回调函数来处理响应。
+
+```js
+const xhr = new XMLHttpRequest();
+xhr.open('get', url, true);
+xhr.onreadystatechange = function() {
+    if(xhr.readystate === 4 && xhr.status === 200 {
+        console.log(xhr.responseText);
+    })
+}
+
+
+xhr.send()
+```
+
+-   axios 是基于 promise 的 http 客户端，可以在浏览器和 Node.js 环境中使用。它提供了一种简介的方式来发送网络请求并支持拦截、数据转换、错误处理等功能，它的设计更加现代化和友好，能够简介和统一网络请求。
+
+```js
+axios
+    .get(url)
+    .then((res) => {
+        console.log(res);
+    })
+    .catch((err) => {
+        console.error(err);
+    });
+```
