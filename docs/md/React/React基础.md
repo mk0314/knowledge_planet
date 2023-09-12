@@ -2,7 +2,7 @@
  * @Author: mengkun822 1197235402@qq.com
  * @Date: 2023-07-11 09:18:29
  * @LastEditors: mengkun822 1197235402@qq.com
- * @LastEditTime: 2023-09-06 10:27:43
+ * @LastEditTime: 2023-09-08 09:16:49
  * @FilePath: \knowledge_planet\docs\md\React\React基础.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -566,6 +566,15 @@ function PublisherComponet() {
 
 withRouter 可以让一般组件拥有路由组件的 props
 
+-   LayzLoad
+
+路由组件的 lazyLoad
+
+```jsx
+// 通过React的lazy函数来配合import（）函数动态加载组件===》 路由组件代码会被分开打包
+const Login = lazy(() => import('./Login'));
+```
+
 -   Routes 和 Route
 
 1. V6 版本移除了 switch，引入了新的替代者：<Routes>
@@ -616,6 +625,12 @@ export default from demo () {
 
 > ### Hooks
 
+Hooks 函数解决了函数组件缺乏状态管理和生命周期方法的的问题。
+
+在 Hooks 引入之前，函数组件是没有生命周期和状态的，并且无法直接使用类组件中的状态和生命周期方法。
+
+通过引入 Hooks 之后函数组件可以更好的管理状态、处理副作用、访问上下文、并实现更好的组件复用
+
 #### 使用 hooks 理由
 
 1. 高阶组件为了复用代码，导致代码层级复杂。
@@ -627,10 +642,46 @@ export default from demo () {
 -   useState(保存组件状态)
 
 ```js
-const { state, setstate } = useState(initialState);
+const [state, setstate] = useState(initialState);
 ```
 
--   useEffect(副作用)和 useLayoutEffect(同步执行副作用)
+#### 三个常用的 Hook
+
+-   State Hook
+
+-   Effect Hook
+
+-   Ref Hook
+
+state 相当于 vue 中的 data，effect 相当于 vue 中的 watch，ref 相当于 vue 中的 computed
+
+为什么 useEffect 会执行两次？？？
+
+因为组件初始化和首次渲染是两个不同的阶段，当组件被挂载到 DOM 上时，会经历初始化阶段和渲染阶段
+
+-   初始化阶段，react 会创建组件的实例，并且执行响应的初始化操作
+
+-   渲染阶段，react 会根据最新的 state 和 props 重新渲染组件，进行虚拟 dom 操作，渲染虚拟 dom
+
+因此，总共会有两次 useEffect 的执行：
+
+第一次是在组件初始化阶段，用于处理组件的初始状态和执行其他初始化操作。
+
+第二次是在组件完成首次渲染后，用于处理 DOM 相关的副作用操作，比如访问或修改 DOM 元素、订阅事件等。
+
+但是， Effect Hook zhong 存在一些问题，useEffect 和组件渲染次数不同。当组件的状态发生变化的时候或者父组件重新渲染的时候，函数组件会重新执行，并且 useEffect 也会再次执行。
+
+这个是因为当组件重新渲染的时候，useEffect 也会执行，但是 useEffect 中的依赖数组为空，所以不会重新执行
+
+```jsx
+useEffect(() => {
+    console.log('useEffect');
+}, []);
+```
+
+-   Ref Hook
+
+Ref 用于保存 DOM 元素或 React 组件的引用，以便可以在其他地方访问它。
 
 **函数组件不存在生命周期，所以不需要把类组件的生命周期搬过来尝试对号入座**
 
@@ -640,7 +691,159 @@ useEffect(() => {
 });
 ```
 
-> ### Redux
+-   Fragmnent
+
+Fragment 是 React 提供的一个特殊组件， 用于 jsx 中返回多个元素而无需创建额外的 dom 节点
+
+正常如果有多个子节点 dom 的时候 我们需要一个 div 父节点包裹着
+
+```jsx
+function App() {
+    return (
+        <div>
+            <p>ddd</p>
+            <p>ddsssd</p>
+        </div>
+    );
+}
+```
+
+但是用了 Fragment 之后就不用创建额外的 dom 节点了
+
+```jsx
+function App() {
+    return (
+        <Fragment>
+            <p>ddd</p>
+            <p>ddsssd</p>
+        </Fragment>
+    );
+}
+```
+
+可以简写成
+
+```jsx
+function App() {
+    return (
+        <>
+            <p>ddd</p>
+            <p>ddsssd</p>
+        </>
+    );
+}
+```
+
+-   Context
+
+Context 是一种用于在组件之间共享数据的方法，它能够避免通过 props 一层层的传递数据，而是通过一个全局变量来共享数据
+
+在 react 中，如果需要想深层次的组件传递数据，通常会使用 props 将数据自顶向下的传递，这样做法会导致代码非常的冗余和难以维护，所以 Context 就很好的解决了这个问题。
+
+1. 创建一个 Context 对象
+
+```jsx
+const MyContext = React.createContext();
+```
+
+2. 在共享数据的组件上下文中使用 Provider 组件提供数据，然后再需要访问这个数据的组件上下文使用 Consumer 组件进行访问数据
+
+```jsx
+
+<MyContext.Provider value={/* 需要共享的数据 */}>
+    {/* 子组件*/}
+</MyContext.Provider>
+<myContext.Consumer>
+    {/*value => {}*/}
+</myContext.Consumer>
+```
+
+如果在同一个树中有多个 Provider，则每个 Provider 会对应到一个相应的 Consumer。这个 Consumer 可以订阅来自其 Provider 的 context 值更改。
+
+-   Component 两个问题
+
+1. 只要执行 setState,即便不改变状态数据，组件也会重新渲染
+
+2. 当前组件重新 render，就会自动重新 render 子组件，即使子组件没有用到父组件的任何数据 ==》 效率低
+
+高效做法：只有当组件的 state 或 props 数据发生变化的时候才重新更新
+
+原因： Component 中的 shouldComponentUpdate()总是返回 true
+
+解决办法：
+
+-   重写 shouldComponetUpdate()方法，比较新旧 state 或者 props，如果有变化则返回 true，没有则返回 false
+
+-   使用 PureComponent：pureComponent 中重写了 shouldComponentUpdate(),当只有 state 或 props 数据发生变化的时候才会返回 true
+
+-   renderProps
+
+renderProps 是一种在组件之间使用一个值为函数的 prop 共享代码的简单技术。
+
+使用 renderProps 模式，你可以在组件中定义一个特定的 prop，通常名为 render、children 或者其他自定义的名称，这个函数接受组件内部的一些数据和方法作为参数，并且返回要渲染的内容，然后通过调用这个传递进来的函数，可以在组件的渲染过程中动态的生成内容。
+
+```jsx
+import React from 'reat';
+
+class RenderPropsComponent extends React.Component {
+    render() {
+        return <div>{this.props.render('foo', () => 'bar')}</div>;
+    }
+}
+
+class App extends React.Component {
+    render() {
+        return (
+            <RenderPropsComponent
+                render={(foo, bar) => (
+                    <div>
+                        {foo} {bar()}
+                    </div>
+                )}
+            />
+        );
+    }
+}
+```
+
+-   getderivedStateFromError()
+
+当父组件的子组件报错时候，会触发 getDerivedstateFromError()方法，可以在此方法中处理错误信息
+
+-   componentDidCatch()
+
+抓取错误
+
+> ### 组件通信总结
+
+#### 组件间的关系
+
+-   父子组件
+
+-   兄弟组件
+
+-   祖孙组件
+
+#### 通信的几种方式
+
+1. props(children props、render props)
+
+2. 消息订阅、event(event)
+
+3. 集中式管理（redux）
+
+4. context(生产者-消费者)
+
+> ### React Router V6
+
+与 React Router V5 相比， 改变了什么？
+
+1. 内置组件的变化， 移除了<Swift />,新增了<Routes />等
+
+2. 语法的变化： component= {Home} 改变为 element={<Home />}
+
+3. 新增多个 hook, useParams、 useNavigate、UseMatch
+    > ### Redux
 
 Redux 是一个用于管理 JavaScript 应用状态的可预测性状态容器，它是一个库，不是框架。它可以帮助你
 
@@ -673,3 +876,7 @@ redux 的主要核心概念和工作原理：
 -   Dispatch(派发)： Dispatch 是一个触发 Action 的方法，当你想要更改应用程序时的状态时，需要 dispatch 一个 action 到 store
 
 -   Subscribe(订阅)： Subscribe 是一个监听 store 状态变化的函数，每当 store 发生改变时，就会调用这个函数。
+
+```
+
+```
