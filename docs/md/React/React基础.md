@@ -2,7 +2,7 @@
  * @Author: mengkun822 1197235402@qq.com
  * @Date: 2023-07-11 09:18:29
  * @LastEditors: mengkun822 1197235402@qq.com
- * @LastEditTime: 2023-09-08 09:16:49
+ * @LastEditTime: 2023-09-12 09:07:52
  * @FilePath: \knowledge_planet\docs\md\React\React基础.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -678,6 +678,29 @@ useEffect(() => {
     console.log('useEffect');
 }, []);
 ```
+
+-   useCallback（记忆函数）
+
+为了防止因为组件重新渲染，导致方法被重新创建，起到缓存作用，只有第二个参数发生变化 el，擦重新声明一次
+
+```jsx
+const handleClick = useCallback(() => {
+    console.log(name);
+}, [name]);
+
+// 只有name改变之后，这个函数才会重新声明一次
+
+// 如果传入空数组，那么第一次创建后就被缓存了，如果name后期改变了，拿到的还是老的name
+
+// 如果不传第二个参数， 每次都会重新声明一次，拿到的就是最新的name
+```
+
+
+
+- useMemo记忆组件
+
+
+useCallback的功能完全由useMemo实现，useCallback的第二个参数是依赖数组，只有依赖数组中的值发生变化，useCallback才会重新声明函数
 
 -   Ref Hook
 
