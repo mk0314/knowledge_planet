@@ -2,7 +2,7 @@
  * @Author: mengkun822 1197235402@qq.com
  * @Date: 2023-07-11 09:18:29
  * @LastEditors: mengkun822 1197235402@qq.com
- * @LastEditTime: 2023-09-12 09:07:52
+ * @LastEditTime: 2023-09-14 15:17:21
  * @FilePath: \knowledge_planet\docs\md\React\React基础.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -602,7 +602,7 @@ import React from 'react';
 import {useNavigate} from 'react-router-dom';
 
 
-export default from demo () {
+export default  demo () {
     const navigate = useNavigate();
     // 第一种方式，指定具体的路径
     const handle =() => {
