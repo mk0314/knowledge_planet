@@ -2,7 +2,7 @@
  * @Author: mengkun822 1197235402@qq.com
  * @Date: 2023-06-08 16:01:07
  * @LastEditors: mengkun822 1197235402@qq.com
- * @LastEditTime: 2023-09-02 08:53:42
+ * @LastEditTime: 2023-10-10 15:44:01
  * @FilePath: \knowledge_planet\_sidebar.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -63,6 +63,10 @@
     -   [:memo: 正则表达式](./md/Python/正则表达式.md)
     -   [:memo: 进程](./md/Python/进程.md)
     -   [:memo: 连接 mysql](./md/Python/连接mysql.md)
+
+-   📚 深度学习
+
+    -   [:memo: 深度学习](./md/深度学习/深度学习.md)
 
 -   📚 工作案例
 
